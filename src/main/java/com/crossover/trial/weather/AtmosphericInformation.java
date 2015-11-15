@@ -28,58 +28,85 @@ class AtmosphericInformation {
 
     public AtmosphericInformation() {
 
+  
     }
 
-    protected AtmosphericInformation(DataPoint temperature, DataPoint wind, DataPoint humidity, DataPoint percipitation, DataPoint pressure, DataPoint cloudCover) {
-        this.temperature = temperature;
-        this.wind = wind;
-        this.humidity = humidity;
-        this.precipitation = percipitation;
-        this.pressure = pressure;
-        this.cloudCover = cloudCover;
-        this.lastUpdateTime = System.currentTimeMillis();
+    protected AtmosphericInformation(DataPoint temperature, DataPoint wind, DataPoint humidity, DataPoint percipitation,
+	    DataPoint pressure, DataPoint cloudCover) {
+	this.temperature = temperature;
+	this.wind = wind;
+	this.humidity = humidity;
+	this.precipitation = percipitation;
+	this.pressure = pressure;
+	this.cloudCover = cloudCover;
+	this.lastUpdateTime = System.currentTimeMillis();
     }
 
     public DataPoint getTemperature() {
-        return temperature;
+	return temperature;
     }
+
     public void setTemperature(DataPoint temperature) {
-        this.temperature = temperature;
+	this.temperature = temperature;
     }
+
     public DataPoint getWind() {
-        return wind;
+	return wind;
     }
+
     public void setWind(DataPoint wind) {
-        this.wind = wind;
+	this.wind = wind;
     }
+
     public DataPoint getHumidity() {
-        return humidity;
+	return humidity;
     }
+
     public void setHumidity(DataPoint humidity) {
-        this.humidity = humidity;
+	this.humidity = humidity;
     }
+
     public DataPoint getPrecipitation() {
-        return precipitation;
+	return precipitation;
     }
+
     public void setPrecipitation(DataPoint precipitation) {
-        this.precipitation = precipitation;
+	this.precipitation = precipitation;
     }
+
     public DataPoint getPressure() {
-        return pressure;
+	return pressure;
     }
+
     public void setPressure(DataPoint pressure) {
-        this.pressure = pressure;
+	this.pressure = pressure;
     }
+
     public DataPoint getCloudCover() {
-        return cloudCover;
+	return cloudCover;
     }
+
     public void setCloudCover(DataPoint cloudCover) {
-        this.cloudCover = cloudCover;
+	this.cloudCover = cloudCover;
     }
+
     protected long getLastUpdateTime() {
-        return this.lastUpdateTime;
+	return this.lastUpdateTime;
     }
+
     protected void setLastUpdateTime(long lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
+	this.lastUpdateTime = lastUpdateTime;
+    }
+    
+    public boolean isAnyOneNotNull(){
+	if(this.getCloudCover() != null
+                || this.getHumidity() != null
+                || this.getPressure() != null
+                || this.getPrecipitation() != null
+                || this.getTemperature() != null
+                || this.getWind() != null){
+	    return true;
+	}
+	return false;
     }
 }

@@ -21,11 +21,14 @@ public class WeatherClient {
 
     /** end point to supply updates */
     private WebTarget collect;
+    
+    private WebTarget airport;
 
     public WeatherClient() {
         Client client = ClientBuilder.newClient();
         query = client.target(BASE_URI + "/query");
         collect = client.target("http://localhost:8080/collect");
+        airport = client.target("http://localhost:8080/collect" + "/airport");
     }
 
     public void pingCollect() {
@@ -53,13 +56,40 @@ public class WeatherClient {
         Response response = path.request().get();
         System.out.println("query.get:" + response.readEntity(String.class));
     }
+    
+    public void getAirport(){
+	WebTarget path = airport.path("/MMU");
+	Response response = path.request().get();
+	 System.out.println("query.get:" + response.readEntity(String.class));
+    }
+    
+    public void addAirport(){
+	WebTarget path = airport.path("/TES/-1/-1");
+	
+	AirportData airportData = new AirportData("TES", -0.1, 2323.0);
+	
+	Response response = path.request().post(Entity.entity(airportData, "application/json"));
+	 System.out.println("query.get:" + response.readEntity(String.class));
+    }
 
+    public void deleteAirport(){
+	WebTarget path = airport.path("/TES");
+	
+	Response response = path.request().delete();
+	 System.out.println("query.get:" + response.readEntity(String.class));
+    }
+    
     public static void main(String[] args) {
         WeatherClient wc = new WeatherClient();
-        wc.pingCollect();
-        wc.populate();
-        wc.query();
-        wc.pingQuery();
+        //wc.pingCollect();
+       // wc.populate();
+        //wc.query();
+        //wc.pingQuery();
+        wc.getAirport();
+        wc.addAirport();
+        wc.getAirport();
+        //wc.deleteAirport();
+        wc.getAirport();
         System.out.print("complete");
         System.exit(0);
     }
